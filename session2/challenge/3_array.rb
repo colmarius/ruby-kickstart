@@ -7,5 +7,10 @@
 
 class String
   def every_other_char
+    each_char
+      .each_with_index
+      .map{ |char, index| char if index.even? }
+      .compact
+      .join
   end
 end
