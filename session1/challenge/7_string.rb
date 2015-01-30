@@ -5,4 +5,10 @@
 # pirates_say_arrrrrrrrr("Pirates say arrrrrrrrr")        # => "arrrrrrrr"
 
 def pirates_say_arrrrrrrrr(string)
+  string
+    .each_char
+    .each_with_index
+    .map { |char, index| string[index + 1] if char.downcase == 'r' }
+    .compact
+    .join
 end
