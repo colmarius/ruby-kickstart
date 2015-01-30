@@ -8,4 +8,23 @@
 # odds_and_evens("abcdefg",false)   # => "aceg"
 
 def odds_and_evens(string, return_odds)
+  return_odds ? odds_in(string) : evens_in(string)
+end
+
+def odds_in(string)
+  string
+    .each_char
+    .each_with_index
+    .select { |char, index| char if index.odd? }
+    .map { |(char, _)| char }
+    .join
+end
+
+def evens_in(string)
+  string
+    .each_char
+    .each_with_index
+    .select { |char, index| char if index.even? }
+    .map { |(char, _)| char }
+    .join
 end
