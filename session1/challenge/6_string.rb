@@ -12,19 +12,18 @@ def odds_and_evens(string, return_odds)
 end
 
 def odds_in(string)
-  string
-    .each_char
-    .each_with_index
-    .select { |char, index| char if index.odd? }
-    .map { |(char, _)| char }
-    .join
+  select_chars(string) { |char, index| char if index.odd? }
 end
 
 def evens_in(string)
+  select_chars(string) { |char, index| char if index.even? }
+end
+
+def select_chars(string, &block)
   string
     .each_char
     .each_with_index
-    .select { |char, index| char if index.even? }
+    .select(&block)
     .map { |(char, _)| char }
     .join
 end
