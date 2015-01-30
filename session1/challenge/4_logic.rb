@@ -9,5 +9,22 @@
 # grade(4,  true)   # => "C"
 # grade(15, true)   # => "B"
 
+def prev_chr(number)
+  (number.ord - 1).chr
+end
+
 def grade(num_books, reads_books)
+  return 'D' if num_books < 0
+
+  grade = case num_books
+          when 0..9
+            'D'
+          when 10..20
+            'C'
+          else
+            'B'
+          end
+
+  grade = prev_chr(grade) if reads_books
+  grade
 end
