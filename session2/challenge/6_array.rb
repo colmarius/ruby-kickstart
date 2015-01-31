@@ -21,7 +21,7 @@ end
 
 def prime?(number)
   return false if number < 2
-  2.upto(number / 2) do |step|
+  2.upto(Math.sqrt(number)) do |step|
     return false if (number % step == 0)
   end
   true
