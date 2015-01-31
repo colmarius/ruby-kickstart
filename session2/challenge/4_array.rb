@@ -10,6 +10,7 @@
 
 def get_squares(array)
   array
+    .sort
     .select do |elem|
       elem if array.any? { |square| square == elem * elem }
     end
