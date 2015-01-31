@@ -8,9 +8,6 @@
 
 def got_three?(array)
   array
-    .each_with_index
-    .any? do |number, index|
-      (number == array[index + 1]) &&
-      (number == array[index + 2])
-    end
+    .each_cons(3)
+    .any? { |a, b, c| a == b && b == c }
 end
