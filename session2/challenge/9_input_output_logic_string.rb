@@ -24,7 +24,16 @@
 # USER:     BYE
 
 def deaf_grandma
+  line = gets.chomp
+  return if line == 'BYE'
 
+  if (line == '') || (line != line.upcase)
+    puts 'HUH?! SPEAK UP, SONNY!'
+  else
+    puts 'NO, NOT SINCE 1938!'
+  end
+
+  deaf_grandma
 end
 
 
