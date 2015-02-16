@@ -19,31 +19,6 @@
 # Then make a public method called print_song that outputs all stanzas from the number of bottles of beer down to zero.
 # Add any additional methods you find helpful.
 
-class EnglishNumber
-  def initialize(number)
-    @number = number
-  end
-
-  def to_s
-    return NUMBERS_TO_ENGLISH[@number] if @number < 20
-
-    numbers = @number.to_s.split('').map(&:to_i)
-    decimal, digit = numbers
-
-    if digit.zero?
-      TENS_TO_ENGLISH[decimal]
-    else
-      "#{TENS_TO_ENGLISH[decimal]}-#{NUMBERS_TO_ENGLISH[digit]}"
-    end
-  end
-
-  private
-
-  NUMBERS_TO_ENGLISH = %w(zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty)
-
-  TENS_TO_ENGLISH = %w(_ ten twenty thirty forty fifty sixty seventy eighty ninety)
-end
-
 class BeerSong
   MIN_BOTTLES = 0
   MAX_BOTTLES = 99
@@ -75,9 +50,26 @@ Take one down, pass it around,
   end
 
   def bottles_word(bottles)
-    number_word = EnglishNumber.new(bottles).to_s.capitalize
-    bottles_word = bottles == 1 ? 'bottle' : 'bottles'
+    number_word = to_english(bottles).to_s.capitalize
+    bottles_word = (bottles == 1 ? 'bottle' : 'bottles')
 
     "#{number_word} #{bottles_word}"
   end
+
+  def to_english(number)
+    return NUMBERS_TO_ENGLISH[number] if number < 20
+
+    numbers = number.to_s.split('').map(&:to_i)
+    decimal, digit = numbers
+
+    if digit.zero?
+      TENS_TO_ENGLISH[decimal]
+    else
+      "#{TENS_TO_ENGLISH[decimal]}-#{NUMBERS_TO_ENGLISH[digit]}"
+    end
+  end
+
+  NUMBERS_TO_ENGLISH = %w(zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty)
+
+  TENS_TO_ENGLISH = %w(_ ten twenty thirty forty fifty sixty seventy eighty ninety)
 end
