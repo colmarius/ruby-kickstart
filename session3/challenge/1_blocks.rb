@@ -3,8 +3,8 @@
 #
 # reverse_map(1, 2, 3) { |i| i * 2 }      # => [6, 4, 2]
 
-def reverse_map(*elements, &block)
+def reverse_map(*elements)
   elements.reverse.map do |element|
-    block.call(element)
+    yield element
   end
 end
