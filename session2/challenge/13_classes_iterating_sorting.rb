@@ -79,7 +79,10 @@ class Blog
   end
 
   def entry
-    "#{user.username} #{date}\n#{text}"
+    <<-ENTRY.gsub(/^\s+/, '')
+      #{user.username} #{date}
+      #{text}
+    ENTRY
   end
 
   def ==(other)
