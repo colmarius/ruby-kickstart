@@ -8,9 +8,9 @@
 # word_count "The dog and the cat" # => {"the" => 2, "dog" => 1, "and" => 1, "cat" => 1}
 
 def word_count(sentence)
-  sentence.split(' ')
-    .map(&:downcase)
-    .each_with_object({}) do |word, memo|
-      memo[word] = memo[word].to_i + 1
+  sentence
+    .split
+    .each_with_object(Hash.new(0)) do |word, memo|
+      memo[word.downcase] += 1
     end
 end
