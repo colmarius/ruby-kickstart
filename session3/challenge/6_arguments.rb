@@ -17,3 +17,14 @@
 # match_maker true,  true,  true, true, nil     # => [false, true]
 # match_maker true,  true,  true, 0, nil        # => [false, true]
 
+def match_maker(discriminant, *args)
+  args
+    .each_slice(2)
+    .each_with_object([])
+    .each do |(a, b), memo|
+      left = !!a
+      right = !!b
+      result = discriminant ? left != right : left == right
+      memo.push(result)
+    end
+end
