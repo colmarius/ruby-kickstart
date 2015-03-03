@@ -21,10 +21,20 @@ def match_maker(discriminant, *args)
   args
     .each_slice(2)
     .each_with_object([])
-    .each do |(a, b), memo|
-      left = !!a
-      right = !!b
-      result = discriminant ? left != right : left == right
+    .each do |(left, right), memo|
+      result = discriminant ? not_same_bool(left, right) : same_bool(left, right)
       memo.push(result)
     end
+end
+
+def same_bool(a, b)
+  bool(a) == bool(b)
+end
+
+def not_same_bool(a, b)
+  bool(a) != bool(b)
+end
+
+def bool(value)
+  !!value
 end
