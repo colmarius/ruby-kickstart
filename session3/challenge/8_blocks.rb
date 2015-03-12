@@ -33,8 +33,8 @@ class Person
     @age = options.fetch(:age, nil)
     @quote = options.fetch(:quote, nil)
 
-    @initializer = initializer
-    initializer.call(self) if initializer
+    @initializer = (initializer || Proc.new { |person| })
+    @initializer.call(self)
   end
 
   def reinit
