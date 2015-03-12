@@ -29,21 +29,20 @@
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
 def shared(first_array, second_array)
-  memo = Hash.new
+  memo = {}
+  memo_shared_keys = []
+  all_elements = (first_array + second_array)
 
-  (first_array + second_array).each do |element|
-    memo[element] = [nil, nil]
+  all_elements.each do |element|
+    in_first = first_array.include?(element)
+    in_second = second_array.include?(element)
+
+    memo[element] = [(in_first || nil), (in_second || nil)]
+
+    unless memo_shared_keys.include?(element)
+      memo_shared_keys.push(element) if in_first && in_second
+    end
   end
-
-  first_array.each do |element|
-    memo[element][0] = true
-  end
-
-  second_array.each do |element|
-    memo[element][1] = true
-  end
-
-  memo_shared_keys = memo.keys.select { |key| memo[key][0] && memo[key][1] }
 
   [memo, memo_shared_keys]
 end
