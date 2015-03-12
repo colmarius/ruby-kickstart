@@ -28,5 +28,22 @@
 # shared [1,2,:c], ['a','b',:c]      # => [{1=>[true, nil], 2=>[true, nil], :c=>[true, true], "a"=>[nil, true], "b"=>[nil, true]}, [:c]]
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
-def shared(a, b)
+def shared(first_array, second_array)
+  memo = Hash.new
+
+  (first_array + second_array).each do |element|
+    memo[element] = [nil, nil]
+  end
+
+  first_array.each do |element|
+    memo[element][0] = true
+  end
+
+  second_array.each do |element|
+    memo[element][1] = true
+  end
+
+  memo_shared_keys = memo.keys.select { |key| memo[key][0] && memo[key][1] }
+
+  [memo, memo_shared_keys]
 end
