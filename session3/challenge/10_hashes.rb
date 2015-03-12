@@ -29,5 +29,19 @@
 # create it from scratch :)
 
 
-def pathify
+def pathify(paths = {})
+  return paths.map { |path| "/#{path}" } if paths.is_a?(Array)
+
+  to_return = []
+
+  paths.each do |root_path, child_paths|
+    root_path = '/' + root_path
+    child_paths = pathify(child_paths)
+
+    child_paths.each do |child_path|
+      to_return.push("#{root_path}#{child_path}")
+    end
+  end
+
+  to_return
 end
