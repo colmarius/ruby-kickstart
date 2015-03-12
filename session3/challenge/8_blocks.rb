@@ -29,9 +29,9 @@ class Person
   attr_accessor :name, :age, :quote
 
   def initialize(options = {}, &initializer)
-    options.keys.each do |option_name|
-      self.send("#{option_name}=", options[option_name])
-    end
+    @name = options.fetch(:name, nil)
+    @age = options.fetch(:age, nil)
+    @quote = options.fetch(:quote, nil)
 
     @initializer = initializer
     initializer.call(self) if initializer
