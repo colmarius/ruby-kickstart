@@ -34,7 +34,7 @@ class Person
     @quote = options.fetch(:quote, nil)
 
     @initializer = (initializer || Proc.new { |person| })
-    @initializer.call(self)
+    reinit
   end
 
   def reinit
