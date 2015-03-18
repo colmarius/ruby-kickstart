@@ -15,7 +15,7 @@ RSpec.describe 'refactoring' do
       pay_by_visa @order, ccn
     end
 
-    it 'pay_by_chec signs the payment' do
+    it 'pay_by_check signs the payment' do
       expect(@order).to receive(:payment).once.with(:type => :check, :signed => true)
       pay_by_check @order
     end
