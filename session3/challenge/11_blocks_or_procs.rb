@@ -31,7 +31,7 @@
 
 
 def array_init(size = 5, &block)
-  return Array.new(size, &block) if block_given?
+  block = ->(index) { "#{index * 100}" } unless block_given?
 
-  Array.new(size) { |index| "#{index * 100}" }
+  Array.new(size, &block)
 end
