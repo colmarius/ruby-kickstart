@@ -30,5 +30,8 @@
 # end
 
 
-def array_init
+def array_init(size = 5, &block)
+  return Array.new(size, &block) if block_given?
+
+  Array.new(size) { |index| "#{index * 100}" }
 end
