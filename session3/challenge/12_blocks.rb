@@ -48,7 +48,7 @@ def pay_by_cash(order)
   order.ship_goods
 end
 
-def pay_by_store_credit(order)
+def pay_by_store_credit(order, current_user)
   order.compute_cost
   order.compute_shipping
   order.compute_tax
