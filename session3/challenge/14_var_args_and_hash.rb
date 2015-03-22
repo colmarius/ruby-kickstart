@@ -27,5 +27,23 @@ end
 def same_ends
 end
 
-def count_clumps
+def count_clumps(*numbers)
+  last_number = nil
+  clump_found = false
+  clump_counts = 0
+
+  numbers.each do |next_number|
+    new_clump_found = last_number && (last_number == next_number) && !clump_found
+
+    if new_clump_found
+      clump_found = true
+      clump_counts += 1
+    elsif last_number != next_number
+      clump_found = false
+    end
+
+    last_number = next_number
+  end
+
+  clump_counts
 end
