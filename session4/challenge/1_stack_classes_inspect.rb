@@ -37,6 +37,7 @@ class Stack
     to_return
   end
 end
+
 stack = Stack.new
 stack.push 1
 stack.push 2
@@ -58,5 +59,13 @@ stack # =>  (3)2)1)
 
 
 class Stack
-  # **define the inspect method here**
+  def inspect
+    node = @head
+    values = []
+    while node
+      values.push(node.data.inspect)
+      node &&= node.next_node
+    end
+    "(#{ values.join(')') })"
+  end
 end
