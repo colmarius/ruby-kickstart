@@ -21,7 +21,12 @@
 # problem_14 2,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => true
 # problem_14 3,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => false
 
-def problem_14
+def problem_14(*params)
+  problem = params.pop[:problem] if params.last.is_a?(Hash)
+  problem ||= :count_clumps
+
+  return same_ends(*params) if problem == :same_ends
+  return count_clumps(*params) if problem == :count_clumps
 end
 
 def same_ends(n, *array)
