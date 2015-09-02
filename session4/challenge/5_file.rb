@@ -15,10 +15,11 @@
 
 def line_sums(file_name)
   lines = File.open(file_name).each_line
-  max_numbers = lines.map do |line|
-    numbers = line.split(' ').map(&:to_i)
-    numbers.max
+  lines.inject(0) do |sum, line|
+    sum += max_number(line)
   end
-  max_numbers.to_a.inject(&:+) || 0
 end
 
+def max_number(line)
+  line.split(' ').map(&:to_i).max
+end
