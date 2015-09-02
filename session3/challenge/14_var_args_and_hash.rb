@@ -24,18 +24,8 @@
 def problem_14
 end
 
-def same_ends(end_length, *array)
-  return true if end_length <= 0
-  return false if end_length > array.length
-
-  left_side = array.slice(0, end_length)
-  right_side = array.slice(array.length - end_length, end_length)
-
-  left_side.each_with_index do |el, index|
-    return false if el != right_side[index]
-  end
-
-  true
+def same_ends(n, *array)
+  array[0, n] == array[-n, n]
 end
 
 def count_clumps(*numbers)
