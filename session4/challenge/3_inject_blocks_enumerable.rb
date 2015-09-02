@@ -1,6 +1,6 @@
 # You are going to write a method called passthrough
 # It receives an enumerable object, and an initial passthrough value, and a block
-# 
+#
 # For each of the elements in the enumerable object,
 # it passes them the passthrough value and the element.
 # Whatever the block returns, must be passed in as the
@@ -14,7 +14,7 @@
 # passthrough 5..10 , 0 do |sum,num|
 #   sum + num
 # end
-# 
+#
 # This should return 45 in the following manner:
 #   The first time the block is passed    0 ,  5 and it returns 5
 #   The second time the block is passed   5 ,  6 and it returns 11
@@ -25,5 +25,10 @@
 #   The method then returns 45
 #
 
-def passthrough
+def passthrough(elements, initial, &block)
+  result = initial
+  elements.each do |element|
+    result = block.call(result, element)
+  end
+  result
 end
