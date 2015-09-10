@@ -26,18 +26,20 @@
 
 
 class StringCollector < String
-  DEPRECATED_METHODS = %w( + * []= )
-
-  DEPRECATED_METHODS.each do |name|
-    define_method(name) do |*args|
-      raise 'use << method instead'
-    end
-  end
-
   def <<(string)
     return self if match(/\b#{string}\b/)
     concat(" ") unless length.zero?
     concat(string)
+  end
+
+  def +(_) raise_deprecated end
+  def *(_) raise_deprecated end
+  def []=(_, _) raise_deprecated end
+
+  private
+
+  def raise_deprecated
+    raise 'use << method instead'
   end
 end
 
