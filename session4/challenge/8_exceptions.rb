@@ -12,3 +12,18 @@
 #   exception_raiser 3   # =>   #<Exception: No 3s allowed!>
 #   exception_raiser 4   # =>   #<SyntaxError: No 4s allowed!>
 #   exception_raiser 5   # =>   #<RubyKickstartException: No 5s allowed!>
+
+RubyKickstartException = Class.new(RuntimeError)
+
+ERRORS = {
+  1 => RuntimeError,
+  2 => ArgumentError,
+  3 => Exception,
+  4 => SyntaxError,
+  5 => RubyKickstartException
+}
+
+def exception_raiser(number)
+  error = ERRORS[number]
+  raise error.new("No #{number}s allowed!") if error
+end
