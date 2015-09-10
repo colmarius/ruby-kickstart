@@ -25,7 +25,15 @@
 # HINT:
 #   The concat method will do the same thing as the << method
 
+class StringCollector < String
+  def <<(string)
+    new_string = "#{self} #{string}".strip
+    self.replace(new_string)
+  end
+end
+
 class ApplicationController
   def body_class
+    @string_collector ||= StringCollector.new
   end
 end
