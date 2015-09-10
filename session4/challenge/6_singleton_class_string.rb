@@ -27,8 +27,8 @@
 
 class StringCollector < String
   def <<(string)
-    new_string = "#{self} #{string}".strip
-    self.replace(new_string)
+    concat(" ") unless length.zero?
+    concat(string)
   end
 end
 
