@@ -4,7 +4,7 @@
 # The String you return must be retained during the object's entire life
 # The method must be able to be called multiple times
 # The String you return should know how to add new CSS classes: each class is separated by a space
-# If someone tries to use + or []= or * on the String, you should raise a RuntimeError 
+# If someone tries to use + or []= or * on the String, you should raise a RuntimeError
 # with a message of "use << method instead"
 # If they try to add the same String more than once, you should simply do nothing
 #
@@ -24,7 +24,25 @@
 #   controller.body_class + 'landing'     # => #<RuntimeError: use << method instead>
 #
 
-class ApplicationController  
+
+class StringCollector < String
+  DEPRECATED_METHODS = %w( + * []= )
+
+  DEPRECATED_METHODS.each do |name|
+    define_method(name) do |*args|
+      raise 'use << method instead'
+    end
+  end
+
+  def <<(string)
+    return self if split(' ').include?(string)
+    concat(" ") unless length.zero?
+    concat(string)
+  end
+end
+
+class ApplicationController
   def body_class
+    @string_collector ||= StringCollector.new
   end
 end
