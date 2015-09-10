@@ -35,7 +35,7 @@ class StringCollector < String
   end
 
   def <<(string)
-    return self if split(' ').include?(string)
+    return self if match(/\b#{string}\b/)
     concat(" ") unless length.zero?
     concat(string)
   end
