@@ -84,10 +84,10 @@
 
 class ApplicationController
   def self.css_classes(*args)
-    names, opts = parse_args(args)
-    before_filter(opts) do |controller|
-      names.each do |name|
-        controller.body_class << name
+    css_names, options = parse_args(args)
+    before_filter(options) do |controller|
+      css_names.each do |css_name|
+        controller.body_class << css_name
       end
     end
   end
@@ -96,7 +96,7 @@ class ApplicationController
 
   def self.parse_args(args)
     has_options = args.last.is_a?(Hash)
-    opts = has_options ? args.pop : {}
-    [args, opts]
+    options = has_options ? args.pop : {}
+    [args, options]
   end
 end
