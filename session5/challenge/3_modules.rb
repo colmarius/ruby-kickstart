@@ -1,12 +1,12 @@
-# Write a list class. Implementation doesn't matter.
+# Write a elements class. Implementation doesn't matter.
 #
-# list = List.new
-# list << 1
-# list << 5
-# list << 3
-# list << 4
-# list << 2
-# list # => #<List: 1, 5, 3, 4, 2>
+# elements = List.new
+# elements << 1
+# elements << 5
+# elements << 3
+# elements << 4
+# elements << 2
+# elements # => #<List: 1, 5, 3, 4, 2>
 #
 #
 # Then give it an each method that iterates over its items in the order they were inserted
@@ -22,3 +22,28 @@
 # ff.max                        # => 5
 # ff.min                        # => 1
 # ff.select { |num| num.odd? }  # => [1, 5, 3]
+
+class List
+  include Enumerable
+
+  def initialize
+    @elements = []
+  end
+
+  def <<(element)
+    @elements << element
+    self
+  end
+
+  def each
+    return unless block_given?
+    @elements.each do |element|
+      yield element
+    end
+  end
+
+  def inspect
+    pretty_elements = @elements.join(', ')
+    "#<List: #{pretty_elements}>"
+  end
+end
