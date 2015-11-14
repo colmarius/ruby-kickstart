@@ -35,11 +35,8 @@ class List
     self
   end
 
-  def each
-    return unless block_given?
-    @elements.each do |element|
-      yield element
-    end
+  def each(&block)
+    @elements.each(&block)
   end
 
   def inspect
